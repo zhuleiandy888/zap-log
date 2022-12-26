@@ -1,5 +1,6 @@
 # zap-log
-zap Log module encapsulation
+zap-Log: a module encapsulation with rotate log
+
 
 ## Basic Usage:
 
@@ -18,11 +19,17 @@ var jsonMode = false
 
 // init 初始化组件
 func init() {
+
+	// 日志保存最大时间(hours)
+	log.MaxAge = 24*30
+	// 日志轮转时间(hours)
+	log.RotationTime = 1
 	// 初始化日志
 	log.InitLogger(DEFAULT_LOG, log.DEBUG, jsonMode)
 	defer log.SugarLogger.Sync()
 }
 func main() {
+
 	log.SugarLogger.Infof("info log...")
 	log.SugarLogger.Warnf("warn log...")
 	log.SugarLogger.Errorf("error log...")

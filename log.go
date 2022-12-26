@@ -3,7 +3,7 @@
  * @Author: zhulei
  * @Date: 2022-11-14 11:36:25
  * @LastEditors: zhulei
- * @LastEditTime: 2022-12-26 15:47:54
+ * @LastEditTime: 2022-12-26 16:03:28
  */
 package log
 
@@ -38,6 +38,8 @@ const (
 )
 
 var SugarLogger *zap.SugaredLogger
+var MaxAge int = 24*30
+var RotationTime int = 1
 
 // InitLogger 初始化日志
 func InitLogger(logFile string, logLevel zapcore.LevelEnabler, jsonMode bool) {
@@ -91,8 +93,8 @@ func getWriter(filename string) (io.Writer, error) {
 	hook, err := rotatelogs.New(
 		filename+"_%Y%m%d%H.log",
 		rotatelogs.WithLinkName(filename),
-		rotatelogs.WithMaxAge(time.Hour*24*30),
-		rotatelogs.WithRotationTime(time.Hour*1),
+		rotatelogs.WithMaxAge(time.Hour*time.Duration(MaxAge)),
+		rotatelogs.WithRotationTime(time.Hour*time.Duration(RotationTime)),
 	)
 
 	//保存日志30天，每1分钟分割一次日志, 测试使用
