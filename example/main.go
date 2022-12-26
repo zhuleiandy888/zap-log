@@ -1,9 +1,12 @@
-# zap-log
-zap Log module encapsulation
+/*
+ * @Notice: edit notice here
+ * @Author: zhulei
+ * @Date: 2022-12-26 14:19:54
+ * @LastEditors: zhulei
+ * @LastEditTime: 2022-12-26 14:26:57
+ */
+package main
 
-## Basic Usage:
-
-```go
 import (
 	log "github.com/zhuleiandy888/zap-log"
 )
@@ -27,6 +30,3 @@ func main() {
 	log.SugarLogger.Warnf("warn log...")
 	log.SugarLogger.Errorf("error log...")
 }
-
-
-```
