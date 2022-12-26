@@ -19,7 +19,7 @@ var jsonMode = false
 // init 初始化组件
 func init() {
 	// 初始化日志
-	log.InitLogger(DEFAULT_LOG, jsonMode)
+	log.InitLogger(DEFAULT_LOG, log.DEBUG, jsonMode)
 	defer log.SugarLogger.Sync()
 }
 func main() {
