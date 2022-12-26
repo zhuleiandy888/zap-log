@@ -3,7 +3,7 @@
  * @Author: zhulei
  * @Date: 2022-12-26 14:19:54
  * @LastEditors: zhulei
- * @LastEditTime: 2022-12-26 14:26:57
+ * @LastEditTime: 2022-12-26 15:48:54
  */
 package main
 
@@ -22,7 +22,7 @@ var jsonMode = false
 // init 初始化组件
 func init() {
 	// 初始化日志
-	log.InitLogger(DEFAULT_LOG, jsonMode)
+	log.InitLogger(DEFAULT_LOG, log.DEBUG, jsonMode)
 	defer log.SugarLogger.Sync()
 }
 func main() {

@@ -3,7 +3,7 @@
  * @Author: zhulei
  * @Date: 2022-11-14 11:36:25
  * @LastEditors: zhulei
- * @LastEditTime: 2022-11-17 16:16:10
+ * @LastEditTime: 2022-12-26 15:47:54
  */
 package log
 
@@ -19,10 +19,28 @@ import (
 	"go.uber.org/zap/zapcore"
 )
 
+const (
+
+	DEBUG = zapcore.DebugLevel
+	
+	INFO = zapcore.InfoLevel
+	
+	WARN = zapcore.WarnLevel
+	
+	ERROR = zapcore.ErrorLevel
+	
+	DPANIC = zapcore.DPanicLevel
+	
+	PANIC = zapcore.PanicLevel
+	
+	FATAL = zapcore.FatalLevel
+
+)
+
 var SugarLogger *zap.SugaredLogger
 
 // InitLogger 初始化日志
-func InitLogger(logFile string, jsonMode bool) {
+func InitLogger(logFile string, logLevel zapcore.LevelEnabler, jsonMode bool) {
 
 	writeSyncer, err := getLogWriter(logFile)
 	if err != nil {
@@ -31,8 +49,9 @@ func InitLogger(logFile string, jsonMode bool) {
 	}
 
 	encoder := getEncoder(jsonMode)
-	core := zapcore.NewCore(encoder, writeSyncer, zapcore.DebugLevel)
-	// core := zapcore.NewCore(encoder, writeSyncer, zapcore.InfoLevel) // 日志级别
+	core := zapcore.NewCore(encoder, writeSyncer, logLevel)
+	// core := zapcore.NewCore(encoder, writeSyncer, zapcore.DebugLevel) 
+	// 日志级别: 
 
 	// 将调用函数信息记录到日志中, AddCallerSkip增加了调用者注释跳过的调用者数量，日志中显示的是调用封装函数的位置
 	// AddStacktrace输出此次调用的堆栈,配置 zapcore.WarnLevel 则 Warn()/Error() 等级别的日志会输出堆栈
